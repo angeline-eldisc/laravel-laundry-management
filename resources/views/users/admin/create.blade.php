@@ -1,0 +1,153 @@
+@extends('layouts.master')
+
+@section('title', 'Add Admin Users')
+
+@section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body card-block p-5">
+                <h3 class="title-3 m-b-30"><i class="zmdi zmdi-account-calendar"></i>add admin user</h3>
+                <form action="{{ route('users.admin.store') }}" method="post" enctype="multipart/form-data" class="form-horizontal" autocomplete="off">
+                    @csrf
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class="form-control-label">Full Name</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" value="{{ old('name') }}">
+                            @if ($errors->has('name'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('name') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="name" class="form-control-label">Gender</label>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-check-inline form-check">
+                                <label for="inline-radio1" class="form-check-label ">
+                                    <input type="radio" id="inline-radio1" name="gender" value="Male" class="form-check-input" {{ old('gender') == 'Male' ? 'checked' : '' }}>Male
+                                </label>&nbsp;&nbsp;&nbsp;
+                                <label for="inline-radio2" class="form-check-label ">
+                                    <input type="radio" id="inline-radio2" name="gender" value="Female" class="form-check-input"{{ old('gender') == 'Female' ? 'checked' : '' }}>Female
+                                </label>
+                            </div>
+                            @if ($errors->has('gender'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('name') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="username" class="form-control-label">Username</label>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <input type="text" id="username" name="username" class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}" value="{{ old('username') }}">
+                            @if ($errors->has('username'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('username') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="password" class="form-control-label">Password</label>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <input type="password" id="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" value="{{ old('password') }}">
+                            @if ($errors->has('password'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('password') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col col-md-3">
+                            <label for="password-confirm" class="form-control-label">{{ __('Confirm Password') }}</label>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="email" class="form-control-label">Email Address</label>
+                        </div>
+                        <div class="col-12 col-md-5">
+                            <input type="email" id="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('email') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="phone_num" class="form-control-label">Phone Number</label>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <input type="number" id="phone_num" name="phone_num" class="form-control {{ $errors->has('phone_num') ? 'is-invalid' : '' }}" value="{{ old('phone_num') }}">
+                            @if ($errors->has('phone_num'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('phone_num') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="address" class="form-control-label">Address</label>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <textarea name="address" id="address" rows="4" class="form-control {{ $errors->has('address') ? 'is-invalid' : '' }}">{{ old('address') }}</textarea>
+                            @if ($errors->has('address'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('address') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label for="profile" class="col col-md-3 control-label">Profile</label>
+                        <div class="col-12 col-md-6">
+                            <img width="200" height="200" />
+                            <input type="file" class="uploads form-control {{ $errors->has('profile') ? 'is-invalid' : '' }}" style="margin-top: 20px;" name="profile">
+                            @if ($errors->has('profile'))
+                                <small class="form-text" style="color: red">
+                                    {{ $errors->first('profile') }}
+                                </small>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col col-md-3"></div>
+                        <div class="col-12 col-md-9">
+                            <a href="{{ route('users.admin.index') }}" class="btn btn-secondary">Back</a>
+                            <button type="submit" class="au-btn au-btn--small au-btn--blue">Submit</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
